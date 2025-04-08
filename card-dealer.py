@@ -9,7 +9,7 @@ class Dealer:
         self.table_cards = []
         self.river = []
 
-    def fdeal(self):
+    def fdeal(self): #deals just to players
         for x in range(self.players):
             for i in range(2):
                 while True:
@@ -22,7 +22,7 @@ class Dealer:
                 self.table_cards.append(card)
         return f"{self.players} hands successfully made."
 
-    def printhands(self):
+    def printhands(self): #simply just printing function
         for x in range(self.players):
             card1 = self.playerhands[x][0].split("-")
             card2 = self.playerhands[x][1].split("-")
