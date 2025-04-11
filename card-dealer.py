@@ -52,6 +52,16 @@ class Dealer:
             self.river.append(card)
         return self.river
 
+    def betting(self):
+        for x in range(self.players):
+            print(f"Player {x+1} please place your bet.")
+            bet = input()
+            if bet == "":
+                print("You have folded.")
+                self.playerhands[x] = None
+            else:
+                print(f"You have placed a bet of {bet}.")
+
 # Usage
 def main():
     game = Dealer(PLAYER_COUNT)
