@@ -81,13 +81,13 @@ class Game:
                                 continue
                             else:
                                 if bet > minimum:
-                                    
                                     print(f"You have raised the bet to {bet}.")
                                     minimum = bet
                                 else:
                                     print(f"You have called the bet of {bet}.")
                                 pot += bet
                                 self.playerbets[x] += bet
+                                self.playerchips[x] -= bet
                         break
                     except ValueError:
                         print("Please enter a valid number.")
