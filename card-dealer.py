@@ -63,6 +63,7 @@ class Game:
         self.playerchips = [1000 for _ in range(PLAYER_COUNT)] #this is per player, just an example
 
     def bets(self):
+        #TODO NEED TO RELOOP TILL ALL BETS ARE SAME
         for x in range(self.dealer.players):
             if self.playerfolds[x]:
                 while True:
@@ -96,7 +97,8 @@ class Game:
 
 
 
-
+def cligameplay():
+    pass
 
 
 
