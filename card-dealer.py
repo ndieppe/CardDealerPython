@@ -60,6 +60,7 @@ class Game:
         self.pot = 0 #this is overall pot, not per player
         self.playerbets = [0 for _ in range(PLAYER_COUNT)] #this is per player
         self.playerfolds = [False for _ in range(PLAYER_COUNT)]
+        self.playerchips = [1000 for _ in range(PLAYER_COUNT)] #this is per player, just an example
 
     def bets(self):
         for x in range(self.dealer.players):
@@ -75,13 +76,18 @@ class Game:
                             print("You need to bet at least the minimum.")
                             continue
                         else:
-                            if bet > minimum:
-                                print(f"You have raised the bet to {bet}.")
-                                minimum = bet
+                            if bet > self.playerchips[x]:
+                                print("You cannot bet more than you have.")
+                                continue
                             else:
-                                print(f"You have called the bet of {bet}.")
-                            pot += bet
-                            self.playerbets[x] += bet
+                                if bet > minimum:
+                                    
+                                    print(f"You have raised the bet to {bet}.")
+                                    minimum = bet
+                                else:
+                                    print(f"You have called the bet of {bet}.")
+                                pot += bet
+                                self.playerbets[x] += bet
                         break
                     except ValueError:
                         print("Please enter a valid number.")
