@@ -2,6 +2,7 @@ import random
 NUMBERS = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A")
 SUITS = ("Clubs", "Spades", "Diamonds", "Hearts")
 PLAYER_COUNT = 5 #change this to change number of players
+
 class Dealer:
     def __init__(self, players):
         self.players = players
@@ -55,16 +56,19 @@ class Dealer:
 class Game:
     def __init__(self):
         self.dealer = Dealer(PLAYER_COUNT)
+        self.mimimum = 0
+        self.pot = 0 #this is overall pot, not per player
+        self.playerbets = [0 for _ in range(PLAYER_COUNT)] #this is per player
+        self.playerfolds = [False for _ in range(PLAYER_COUNT)]
 
     def bets(self):
-        minimum = 0
         for x in range(self.dealer.players):
             while True:
                 try:
                     bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
                     if bet == -1:
                         print("You have folded.")
-                        #need to turn them out
+                        self.playerfolds[x] = True
                         break
                     elif bet < minimum:
                         print("You need to bet at least the minimum.")
@@ -75,8 +79,8 @@ class Game:
                             minimum = bet
                         else:
                             print(f"You have called the bet of {bet}.")
-                        break
-                    pass #put more here
+                        pot += bet
+                        self.playerbets[x] += bet
                     break
                 except ValueError:
                     print("Please enter a valid number.")
