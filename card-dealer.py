@@ -52,18 +52,45 @@ class Dealer:
             self.river.append(card)
         return self.river
 
-    def betting(self):
-        for x in range(self.players):
-            print(f"Player {x+1} please place your bet.")
-            bet = input()
-            if bet == "":
-                print("You have folded.")
-                self.playerhands[x] = None
-            else:
-                print(f"You have placed a bet of {bet}.")
+class Game:
+    def __init__(self):
+        self.dealer = Dealer(PLAYER_COUNT)
 
-# Usage
-def main():
+    def bets(self):
+        minimum = 0
+        for x in range(self.dealer.players):
+            while True:
+                try:
+                    bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
+                    if bet == -1:
+                        print("You have folded.")
+                        #need to turn them out
+                        break
+                    elif bet < minimum:
+                        print("You need to bet at least the minimum.")
+                        continue
+                    else:
+                        if bet > minimum:
+                            print(f"You have raised the bet to {bet}.")
+                            minimum = bet
+                        else:
+                            print(f"You have called the bet of {bet}.")
+                        break
+                    pass #put more here
+                    break
+                except ValueError:
+                    print("Please enter a valid number.")
+
+
+
+
+
+
+
+
+
+# This is just used to deal cards and how no gameplay
+def deal():
     game = Dealer(PLAYER_COUNT)
     print(game.fdeal()) #all cards are delt to players
     game.printhands() #prints out all cards (obviously wouldn't use in real game)
@@ -85,4 +112,4 @@ def main():
             print("----------       ----------")
 
 if __name__ == "__main__":
-    main()
+    deal()
