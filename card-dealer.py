@@ -63,27 +63,30 @@ class Game:
 
     def bets(self):
         for x in range(self.dealer.players):
-            while True:
-                try:
-                    bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
-                    if bet == -1:
-                        print("You have folded.")
-                        self.playerfolds[x] = True
-                        break
-                    elif bet < minimum:
-                        print("You need to bet at least the minimum.")
-                        continue
-                    else:
-                        if bet > minimum:
-                            print(f"You have raised the bet to {bet}.")
-                            minimum = bet
+            if self.playerfolds[x]:
+                while True:
+                    try:
+                        bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
+                        if bet == -1:
+                            print("You have folded.")
+                            self.playerfolds[x] = True
+                            break
+                        elif bet < minimum:
+                            print("You need to bet at least the minimum.")
+                            continue
                         else:
-                            print(f"You have called the bet of {bet}.")
-                        pot += bet
-                        self.playerbets[x] += bet
-                    break
-                except ValueError:
-                    print("Please enter a valid number.")
+                            if bet > minimum:
+                                print(f"You have raised the bet to {bet}.")
+                                minimum = bet
+                            else:
+                                print(f"You have called the bet of {bet}.")
+                            pot += bet
+                            self.playerbets[x] += bet
+                        break
+                    except ValueError:
+                        print("Please enter a valid number.")
+            else:
+                pass
 
 
 
