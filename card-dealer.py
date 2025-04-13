@@ -64,36 +64,37 @@ class Game:
 
     def bets(self):
         #TODO NEED TO RELOOP TILL ALL BETS ARE SAME
-        for x in range(self.dealer.players):
-            if self.playerfolds[x]:
-                while True:
-                    try:
-                        bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
-                        if bet == -1:
-                            print("You have folded.")
-                            self.playerfolds[x] = True
-                            break
-                        elif bet < minimum:
-                            print("You need to bet at least the minimum.")
-                            continue
-                        else:
-                            if bet > self.playerchips[x]:
-                                print("You cannot bet more than you have.")
+        while self.pot != self.playerbets[0]*self.players:
+            for x in range(self.dealer.players):
+                if self.playerfolds[x]:
+                    while True:
+                        try:
+                            bet = int(input(f"Player {x+1}, please enter your bet (-1 to fold): "))
+                            if bet == -1:
+                                print("You have folded.")
+                                self.playerfolds[x] = True
+                                break
+                            elif bet < minimum:
+                                print("You need to bet at least the minimum.")
                                 continue
                             else:
-                                if bet > minimum:
-                                    print(f"You have raised the bet to {bet}.")
-                                    minimum = bet
+                                if bet > self.playerchips[x]:
+                                    print("You cannot bet more than you have.")
+                                    continue
                                 else:
-                                    print(f"You have called the bet of {bet}.")
-                                pot += bet
-                                self.playerbets[x] += bet
-                                self.playerchips[x] -= bet
-                        break
-                    except ValueError:
-                        print("Please enter a valid number.")
-            else:
-                pass
+                                    if bet > minimum:
+                                        print(f"You have raised the bet to {bet}.")
+                                        minimum = bet
+                                    else:
+                                        print(f"You have called the bet of {bet}.")
+                                    pot += bet
+                                    self.playerbets[x] += bet
+                                    self.playerchips[x] -= bet
+                            break
+                        except ValueError:
+                            print("Please enter a valid number.")
+                else:
+                    pass
 
 
 
