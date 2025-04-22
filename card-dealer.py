@@ -63,7 +63,6 @@ class Game:
         self.playerchips = [1000 for _ in range(PLAYER_COUNT)] #this is per player, just an example
 
     def bets(self):
-        #TODO NEED TO RELOOP TILL ALL BETS ARE SAME
         while self.pot != self.playerbets[0]*self.players:
             for x in range(self.dealer.players):
                 if self.playerfolds[x]:
@@ -95,6 +94,8 @@ class Game:
                             print("Please enter a valid number.")
                 else:
                     pass
+
+    #TODO COMPLETE ACTUAL GAME FUNCTION
 
 
 
